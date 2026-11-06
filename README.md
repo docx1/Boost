@@ -14,8 +14,8 @@ Boost tiers as in Boost 6.2.0 for AAPS 3.4.2.6.
 > the profile while it lasts, makes the post-exercise recovery window grow with the length of the
 > bout up to 12 hours, and applies that recovery after an endurance bout even when Post-Exercise
 > Recovery is switched off. It needs heart-rate integration. Nothing else differs from the release.
-> The details are in [Boost-endurance](docs/boost-endurance.md). Boost CI builds release tags only,
-> so this branch is built from a checkout of it in Android Studio.
+> The details are in [Boost-endurance](docs/boost-endurance.md). To build it with Boost CI, select
+> the release `4.0.0-boost-6.3.0.E`.
 
 ## Dosing changes from Boost 6.2.0
 
