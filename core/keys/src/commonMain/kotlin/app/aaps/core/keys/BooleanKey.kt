@@ -320,6 +320,10 @@ enum class BooleanKey(
     ApsBoostAutosensWhenNoTdd("boost_autosens_when_no_tdd", true, KeysStrings.pref_title_boost_autosens_when_no_tdd, summary = KeysStrings.pref_summary_boost_autosens_when_no_tdd, defaultedBySM = true),
     ApsBoostHrIntegrationEnabled("boost_hr_integration_enabled", false, KeysStrings.pref_title_boost_hr_integration_enabled, summary = KeysStrings.pref_summary_boost_hr_integration_enabled, defaultedBySM = true),
     ApsBoostHrStressDetection("boost_hr_stress_detection", false, KeysStrings.pref_title_boost_hr_stress_detection, summary = KeysStrings.pref_summary_boost_hr_stress_detection, defaultedBySM = true),
+    // Boost-endurance (2026-09-28 on 3.4): hold sustained low-step aerobic work (cycling, rowing) as one
+    // ENDURANCE state with a profile reduction, and give it a recovery window scaled by its length.
+    // Needs heart-rate integration. Removes insulin only.
+    ApsBoostEnduranceEnabled("boost_endurance_enabled", true, KeysStrings.pref_title_boost_endurance_enabled, summary = KeysStrings.pref_summary_boost_endurance_enabled, defaultedBySM = true, dependency = ApsBoostHrIntegrationEnabled),
     ApsBoostV2ChartFaithful("boost_v2_chart_faithful", false, KeysStrings.pref_title_boost_v2_chart_faithful, defaultedBySM = true),
 
     /**

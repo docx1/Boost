@@ -7,6 +7,16 @@ You build it yourself and you are responsible for how you use it. AGPL-3.0, as A
 This line is Boost 6.3.0: the V6 meal logic and the Boost high temp, with each SMB sized by the
 Boost tiers as in Boost 6.2.0 for AAPS 3.4.2.6.
 
+> This is the `boost-endurance-4.0.0` branch, Boost 6.3.0.E. It is the Boost 6.3.0 release with
+> changes for long, low-step endurance exercise such as cycling, rowing or paddling, all live and all
+> able only to reduce insulin, ported from the `Boost-endurance` line on AAPS 3.4. Compared with the
+> release, it adds an Endurance activity state that holds a ride together as one bout and reduces
+> the profile while it lasts, makes the post-exercise recovery window grow with the length of the
+> bout up to 12 hours, and applies that recovery after an endurance bout even when Post-Exercise
+> Recovery is switched off. It needs heart-rate integration. Nothing else differs from the release.
+> The details are in [Boost-endurance](docs/boost-endurance.md). Boost CI builds release tags only,
+> so this branch is built from a checkout of it in Android Studio.
+
 ## Dosing changes from Boost 6.2.0
 
 - There is one Boost plugin, and it runs V6. If you ran plain Boost on 3.4, you move to V6 dosing

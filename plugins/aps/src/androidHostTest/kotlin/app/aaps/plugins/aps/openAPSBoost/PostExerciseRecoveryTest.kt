@@ -6,27 +6,13 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 /**
- * Unit tests for the post-exercise recovery parameter calculation logic.
- *
- * The `when (lastExerciseStateAtTransition)` block in [OpenAPSBoostPlugin.invoke] is
- * extracted here as a pure function for isolated testing, mirroring the production logic
- * exactly.  No plugin instantiation is needed.
- *
- * Production code reference (OpenAPSBoostPlugin.kt ~line 756):
- *
- *   val (windowMultiplier, targetOffsetMgdl, scaleMultiplier) = when (lastExerciseStateAtTransition) {
- *       "VIGOROUS_AEROBIC" -> Triple(1.25, 0.0,  0.8)
- *       "RESISTANCE"       -> Triple(1.5,  10.0, 1.2)
- *       "LIGHT_AEROBIC"    -> Triple(0.5,  0.0,  1.4)
- *       else               -> Triple(1.0,  0.0,  1.0)
- *   }
- *   val recoveryMillis = (postExerciseRecoveryHours * 3600_000L * windowMultiplier).toLong()
- *   val recoveryTargetMgdl = postExerciseRecoveryTarget + targetOffsetMgdl
- *   activeRecoveryScale = (postExerciseRecoveryScale * scaleMultiplier).coerceIn(0.1, 1.0)
+ * Unit tests for the post-exercise recovery parameters by exercise type. The parameters come from
+ * [stepRecoveryWindow], the function the plugin calls, through one 30 minute bout of the given type
+ * (a length factor of 1), so no copy of the production multipliers is kept here.
  */
 class PostExerciseRecoveryTest {
 
-    // ─── Mirror of the production `when` block ───────────────────────────────────
+    // ─── Through the production transition ───────────────────────────────────────
 
     data class RecoveryParams(
         val recoveryMillis: Long,
@@ -40,16 +26,9 @@ class PostExerciseRecoveryTest {
         postExerciseRecoveryTarget: Double,
         postExerciseRecoveryScale: Double
     ): RecoveryParams {
-        val (windowMultiplier, targetOffsetMgdl, scaleMultiplier) = when (lastExerciseState) {
-            "VIGOROUS_AEROBIC" -> Triple(1.25, 0.0,  0.8)
-            "RESISTANCE"       -> Triple(1.5,  10.0, 1.2)
-            "LIGHT_AEROBIC"    -> Triple(0.5,  0.0,  1.4)
-            else               -> Triple(1.0,  0.0,  1.0)
-        }
-        val recoveryMillis = (postExerciseRecoveryHours * 3600_000L * windowMultiplier).toLong()
-        val recoveryTargetMgdl = postExerciseRecoveryTarget + targetOffsetMgdl
-        val activeRecoveryScale = (postExerciseRecoveryScale * scaleMultiplier).coerceIn(0.1, 1.0)
-        return RecoveryParams(recoveryMillis, recoveryTargetMgdl, activeRecoveryScale)
+        val t = endedBout(lastExerciseState, postExerciseRecoveryHours, postExerciseRecoveryScale)
+        val opened = checkNotNull(t.opened)
+        return RecoveryParams(opened.windowMs, postExerciseRecoveryTarget + opened.targetOffsetMgdl, t.state.scale)
     }
 
     // ─── Recovery parameter tests ─────────────────────────────────────────────────

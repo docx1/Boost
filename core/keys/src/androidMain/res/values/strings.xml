@@ -461,6 +461,8 @@
     <string name="pref_title_boost_hr_max_bpm">Maximum Heart Rate (HRmax)</string>
     <string name="pref_title_boost_hr_resting_bpm">Resting Heart Rate</string>
     <string name="pref_title_boost_hr_stress_detection">Enable Stress Detection</string>
+    <string name="pref_title_boost_endurance_enabled">Endurance exercise (cycling, rowing)</string>
+    <string name="pref_title_boost_endurance_pct">Endurance Profile Percent</string>
     <string name="pref_title_boost_hr_window_minutes">HR Averaging Window (minutes)</string>
     <string name="pref_title_boost_inactivity_pct">Inactivity Profile Percent</string>
     <string name="pref_title_boost_inactivity_steps">Inactivity Step Count</string>
@@ -550,6 +552,8 @@
     <string name="pref_summary_boost_hr_resting_bpm">Your resting heart rate in BPM used for Karvonen Heart Rate Reserve method. Measure on waking before getting up. Default 60 bpm. Range 30–100.</string>
     <string name="pref_summary_boost_hr_window_minutes">How many minutes of recent HR data to average for exercise classification. Default 15 min gives a stable reading. Range 5–60 min.</string>
     <string name="pref_summary_boost_hr_stress_detection">Detect elevated HR without movement as possible stress or illness. Reduces insulin aggressiveness (raises target) when HR is in zone 2+ but steps are very low. Separate opt-in; disable if you experience false positives.</string>
+    <string name="pref_summary_boost_endurance_enabled">Needs heart-rate integration. After 30 minutes of heart rate in zone 2 or above with fewer than 100 steps every 15 minutes, Boost treats the effort as endurance exercise: profile to Endurance Profile Percent and target 150 mg/dL (8.3 mmol/L), held through descents and stops until 20 minutes pass without it. When it ends, a recovery window follows whose length grows with the ride, up to 12 hours, whether or not Post-Exercise Recovery is switched on. Removes insulin only.</string>
+    <string name="pref_summary_boost_endurance_pct">Profile percentage during endurance exercise. Lower gives less insulin. Default: 60</string>
     <string name="pref_summary_boost_post_exercise_recovery_enabled">Automatically set a high TempTarget and reduce SMB aggressiveness after exercise to guard against delayed hypoglycemia</string>
     <string name="pref_summary_boost_post_exercise_recovery_hours">How long the recovery TempTarget and SMB reduction remain active after exercise ends. Evidence supports 1–4h; default 2h covers the primary risk window (Riddell et al.)</string>
     <string name="pref_summary_boost_post_exercise_recovery_target">BG target during recovery window. ATTD 2020 consensus recommends 7–10 mmol/L (126–180 mg/dL) after aerobic exercise; default 8.0 mmol/L / 144 mg/dL</string>

@@ -28,9 +28,10 @@ class V5ExerciseInputsTest {
 
     @Test fun `set matches the V3MLG3 mapping verbatim`() {
         // The V5 consumers were calibrated against V3MLG3's shadow-era mapping — the live set
-        // must be exactly that set (no drift when someone edits one list but not the other).
+        // must be exactly that set (no drift when someone edits one list but not the other), plus
+        // ENDURANCE, which Boost-endurance added and V3MLG3 never produces.
         assertThat(V5_EXERCISE_STATES).containsExactly(
-            "ACTIVE", "VIGOROUS_AEROBIC", "MODERATE_AEROBIC", "LIGHT_AEROBIC", "RESISTANCE", "STRESS"
+            "ACTIVE", "VIGOROUS_AEROBIC", "MODERATE_AEROBIC", "LIGHT_AEROBIC", "RESISTANCE", "STRESS", "ENDURANCE"
         )
     }
 

@@ -124,6 +124,8 @@ boost_dynisf_bg_cap|UnitDoubleKey|true
 boost_dynisf_normal_target|UnitDoubleKey|true
 boost_dynisf_velocity|DoubleKey|true
 boost_end_time|StringKey|true
+boost_endurance_enabled|BooleanKey|true
+boost_endurance_pct|DoubleKey|true
 boost_hc_grant_permission|ApsIntentKey|false
 boost_health_connect_hr_enabled|BooleanKey|true
 boost_health_connect_last_sync_ms|LongNonKey|true

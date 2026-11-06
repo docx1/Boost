@@ -15,7 +15,7 @@ import java.io.File
  *
  * Two types of scenario are supported:
  *  - `hr_classification`  — tests [HrActivityCalculator.classify] fusion logic
- *  - `recovery_parameters` — tests the recovery `when` block parameter selection
+ *  - `recovery_parameters` — tests the recovery parameters from [stepRecoveryWindow]
  *
  * Note: Scenario files are read via the filesystem path `src/androidHostTest/resources/exercise_scenarios/`
  * relative to the module root (same pattern as autotune tests in this module).
@@ -109,16 +109,10 @@ class ExerciseRegressionTest {
         postExerciseRecoveryTarget: Double,
         postExerciseRecoveryScale: Double
     ): Triple<Long, Double, Double> {
-        val (windowMultiplier, targetOffsetMgdl, scaleMultiplier) = when (lastExerciseState) {
-            "VIGOROUS_AEROBIC" -> Triple(1.25, 0.0,  0.8)
-            "RESISTANCE"       -> Triple(1.5,  10.0, 1.2)
-            "LIGHT_AEROBIC"    -> Triple(0.5,  0.0,  1.4)
-            else               -> Triple(1.0,  0.0,  1.0)
-        }
-        val recoveryMillis = (postExerciseRecoveryHours * 3_600_000L * windowMultiplier).toLong()
-        val recoveryTargetMgdl = postExerciseRecoveryTarget + targetOffsetMgdl
-        val activeRecoveryScale = (postExerciseRecoveryScale * scaleMultiplier).coerceIn(0.1, 1.0)
-        return Triple(recoveryMillis, recoveryTargetMgdl, activeRecoveryScale)
+        // Through the production transition: one 30 minute bout, a length factor of 1.
+        val t = endedBout(lastExerciseState, postExerciseRecoveryHours, postExerciseRecoveryScale)
+        val opened = checkNotNull(t.opened)
+        return Triple(opened.windowMs, postExerciseRecoveryTarget + opened.targetOffsetMgdl, t.state.scale)
     }
 
     @TestFactory
